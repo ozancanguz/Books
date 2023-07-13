@@ -22,5 +22,8 @@
         <action
             android:id="@+id/action_bookDetailsFragment_to_bookListFragment"
             app:destination="@id/bookListFragment" />
+        <argument
+            android:name="currentBook"
+            app:argType="com.ozancanguz.books.data.model.Result" />
     </fragment>
 </navigation>

@@ -1,12 +1,13 @@
 package com.ozancanguz.books.data.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.ozancanguz.books.R
 import com.ozancanguz.books.data.model.Book
 import com.ozancanguz.books.databinding.BooklistrvlayoutBinding
+import com.ozancanguz.books.ui.fragments.booklist.BookListFragmentDirections
+import com.ozancanguz.books.utils.Util.Companion.loadImage
 
 class BookListAdapter : RecyclerView.Adapter<BookListAdapter.BookListViewHolder>() {
 
@@ -17,6 +18,8 @@ class BookListAdapter : RecyclerView.Adapter<BookListAdapter.BookListViewHolder>
             binding.titleTextView.text = book.title
             binding.priceTextView.text = book.fiyat
             binding.authorNameTextView.text = book.yazar
+            binding.imageView.loadImage(book.image)
+
         }
     }
 
@@ -39,6 +42,12 @@ class BookListAdapter : RecyclerView.Adapter<BookListAdapter.BookListViewHolder>
 
     override fun onBindViewHolder(holder: BookListViewHolder, position: Int) {
         val currentBook = bookList[position]
+
+        holder.itemView.setOnClickListener {
+            val directions=BookListFragmentDirections.actionBookListFragmentToBookDetailsFragment(currentBook)
+           holder.itemView.findNavController().navigate(directions)
+        }
         holder.bind(currentBook)
+
     }
 }
